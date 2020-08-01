@@ -1,7 +1,7 @@
 import React from 'react';
 import QuestionLevel from './questionLevel';
 import QuestionItem from './questionItem';
-import SendButton from './sendButton';
+import DefaultButton from './defaultButton';
 
 import Notification from './notification';
 
@@ -47,7 +47,7 @@ function TriviaQuestion(props) {
         {itens?.map((item,index) =>{
           return <QuestionItem key={index} selectItem={selectItem} item={item} />
         })}
-        <SendButton action={send} text="Answer"/>
+        <DefaultButton action={send} text="Answer"/>
       </div>
     </>
   );

@@ -1,7 +1,7 @@
 import React from 'react';
 import { faCheckCircle, faTimesCircle } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import SendButton from './sendButton';
+import DefaultButton from './defaultButton';
 
 function Notification(props) {
   const card = props.type ? "notification__card--right":"notification__card--wrong";
@@ -17,7 +17,7 @@ function Notification(props) {
           <div className={card}>
             <FontAwesomeIcon className={iconClass} icon={icon}/>
             <h3>{text}</h3>
-            <SendButton action={()=> console.log("next")} text={"Next"}/>
+            <DefaultButton action={()=> console.log("next")} text={"Next"}/>
 
           </div>
         </div>
