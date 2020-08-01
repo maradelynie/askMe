@@ -1,17 +1,22 @@
 import React from 'react';
 import ContentHeader from '../../components/contentHeader';
+import CategoryCard from '../../components/categoryCard';
 
 function Home() {
   return (
     <>
+    <div className="category__container">
       <ContentHeader close={false} text="Categorias"/>
+    </div>
       <div className="category__grid">
 
-        <div className="category__card"><div className="card__content">historia</div></div>
-        <div className="category__card"><div className="card__content">Georafia</div></div>
-        <div className="category__card"><div className="card__content">Mitologia</div></div>
-        <div className="category__card"><div className="card__content">Esportes</div></div>
-        <div className="category__card"><div className="card__content">Politicas</div></div>
+        <CategoryCard category="História" />
+        <CategoryCard category="Geografia" />
+        <CategoryCard category="Mitologia" />
+        <CategoryCard category="Esportes" />
+        <CategoryCard category="Politica" />
+        <CategoryCard category="Conhecimento Geral" />
+        
       </div>
     </>
   );

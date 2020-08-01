@@ -12,7 +12,7 @@ export default function Routes(){
             <Switch>
                 <Route path={`/`} exact component={Home} />
                 <Route path={`/trivia/:category`}  component={Trivia} />
-                <Route path={`/register`}  component={Report} />
+                <Route path={`/report`}  component={Report} />
             </Switch>
         </BrowserRouter>
     )

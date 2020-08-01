@@ -1,4 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Arvo&display=swap');
+
 @import "./variables.scss";
 
 *{
@@ -10,6 +12,24 @@ body{
     background-color: $base-color;
     
 }
+.card{
+    background-color: $base-color-light;
+    border-radius: 8px;
+    padding: 1em;
+    border: 1px solid $default-border-color;
+    box-shadow: $default-shadow-color;
+}
+.clicable{
+    cursor: pointer;
+
+}
+.clicable:hover{
+    opacity: 0.5;
+}
+.clicable:active{
+    opacity: 1;
+}
+
 
 .header__container{
     background-color: $principal-color;
@@ -25,33 +45,180 @@ body{
     margin: auto;
     padding: 20px;
     
-    
+}
+@media only screen and (max-width: 400px) {
+    .main__container{
+        padding: 0px;
+    }
+    .category__title{
+        padding: 0 20px ;
+
+    }
+}.category__container{
+    padding: 1em 0;
 }
 .category__title{
-    line-height: 3em;
+    line-height: 2.5em;
+    font-size: 24px;
 }
 .category__grid{
-    display: flex;  
-    flex-wrap: wrap;
+    display: grid;  
+    // flex-wrap: wrap;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
     gap: 1em;
     align-items: center;
 }
+@media only screen and (max-width: 580px) {
+    .category__grid{
+        grid-template-columns: 1fr 1fr 1fr;
+    }
+}
+@media only screen and (max-width: 440px) {
+    .category__grid{
+        grid-template-columns: 1fr 1fr;
+    }
+}
 .category__card{
-    width: 20%;
-    min-width: 200px;
-    background-color: $base-color-light;
-    border-radius: 8px;
-    padding: 1em;
+    @extend .card;
+    @extend .clicable;
+
     height: 7em;
     display: flex;
     align-items: flex-end;
-    border: 1px solid $default-border-color;
-    box-shadow: $default-shadow-color;
-    cursor: pointer;
 }
-.category__card:hover{
-    opacity: 0.5;
+
+.category__header{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
 }
-.category__card:active{
+.icon__close{
+    border: 2px solid #000000;
+    border-radius: 50%;
+    padding: 1px;
+    min-width: 1em;
+    height: 1em;
+    margin-right: 5px;
+}
+.close__content{
+    @extend .clicable;
+}
+.trivia__container{
+    max-width: 700px;
+    margin: auto;
+}
+.question__card{
+    @extend .card;
+    padding: 2em;
+}
+.question__title{
+    font-size: 18px;
+    font-family: 'Arvo', serif;
+    font-weight: 600;
+}
+.question__header{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.dificulty__container{
+    font-size: 12px;
+    background-color: rgba($principal-color, 0.2);
+    padding: 5px 10px;
+    border-radius: 1em;
+    color: $principal-color;
+}
+.icon__dificulty{
+    font-size: .7em;
+}
+.question__item{
+    @extend .card;
+    @extend .clicable;
+    box-sizing: content-box;
+    margin: 1em 0;
+}
+.question__item--selected{
+    @extend .question__item;
+    border: 3px solid $principal-highlight-color;
+}
+.question__text{
+    margin: 2em 0 3em;
+}
+.send__button{
+    @extend .clicable;
+
+    background-color: $base-button-color;
+    color: $base-color-light;
+    width: 150px;
+    padding:13px;
+    margin: 2em 0 0;
+    border: none;
+    border-radius: 8px;
+}
+@media only screen and (max-width: 700px) {
+    .send__button{
+        width: 100%;
+    }
+}
+.send__button:hover{
     opacity: 1;
+    background-color: $principal-highlight-color;
+}
+.send__button:active{
+    transform: scale(.98);
+}
+.send__button:focus{
+    outline: none;
+}
+.send__container{
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+.notification__container{
+    background-color: rgba($text-color-dark, .5);
+    position: fixed;
+    top:0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 10;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.notification__card{
+    @extend .card;
+    width: 100%;
+    height: 100%;
+    max-width: 350px;
+    max-height: 250px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    
+}
+.icon__notification{
+    font-size: 3.5em;
+    margin: 15px;
+}
+.icon__right{
+    @extend .icon__notification;
+
+    color:#32CB82;
+}
+.notification__card--right{
+    @extend .notification__card;
+    border: 3px solid #32CB82;
+}
+.icon__notification--wrong{
+    @extend .icon__notification;
+
+    color:#FF6660;
+}
+.notification__card--wrong{
+    @extend .notification__card;
+    border: 3px solid #FF6660;
 }

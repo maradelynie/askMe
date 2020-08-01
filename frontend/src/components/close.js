@@ -1,11 +1,16 @@
 import React from 'react';
+import { faTimes } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {useHistory} from 'react-router-dom'
+
 
 function Close() {
+  const history = useHistory();
  
   return (
-    <>
-      close
-    </>
+    <div onClick={() => history.push("/")}  className="close__content">
+      <FontAwesomeIcon className="icon__close" icon={faTimes}/> Close
+    </div>
   );
 }
 
