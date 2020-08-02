@@ -37,6 +37,7 @@ function TriviaQuestion(props) {
   }
   const clearSelection = () => {
     getAllElments().map(item => item.classList.remove("question__item--selected"))
+    setDisableAnser(true)
   }
   const clearData = () => {
     document.querySelector('.question__text').innerHTML="&nbsp;";

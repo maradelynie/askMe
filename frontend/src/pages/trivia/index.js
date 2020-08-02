@@ -1,64 +1,77 @@
 import React, {useState, useEffect} from 'react';
-import ContentHeader from '../../components/contentHeader';
-import TriviaQuestion from '../../components/triviaQuestion';
 import { decode } from 'js-base64';
 import {useHistory} from 'react-router-dom'
 
-import {getQuestion,postStartTrivia,getResults,sendAnswerData} from '../../services';
+import ContentHeader from '../../components/contentHeader';
+import TriviaQuestion from '../../components/triviaQuestion';
 
+import {validateToken, getQuestion,postStartTrivia,getResults,sendAnswerData,} from '../../services';
 
 function Trivia(props) {
   const history = useHistory();
-  const numberOfQuestions = 10
+  const {categoryId, category} = props.match.params;
+  const difficultyOptions = ["easy","medium", "hard"]
+  const numberOfQuestions = 10;
+
   const [difficulty, setDifficulty] = useState("medium")
   const [question, setQuestion] = useState("")
   const [itens, setItens] = useState([])
   const [answer, setAnswer] = useState("")
-  const difficultyOptions = ["easy","medium", "hard"]
   const [difficultyChangeCounter, setDifficultyChangeCounter] = useState([])
   const [categoryRecordsDataBase, setCategoryRecordsDataBase] = useState([])
 
   useEffect(() => {
-    const checkDataBase = async () => {
-      const data = await getResults(props.match.params.categoryId)
-      console.log(data)
-    if(data.records.length) {
-      if(data.records[0].questions.length>=numberOfQuestions-1){
-        return history.push("/report/"+props.match.params.categoryId)
-      }
-      setCategoryRecordsDataBase(data.records[0].questions);
-    }else{
-      console.log("nao tem")
-
-        postStartTrivia({data:{ 
-          userId: "001",
-          category: props.match.params.categoryId
-        }});
-      }
+    const start = async () => {
+      await checkDataBase()
+      setNewQuestion()
     }
 
-    checkDataBase();
-    setNewQuestion();
+    start()
     
   }, [])
 
   useEffect(() => {
-    if(question!==""){
-
-    const triviaRecords = [...categoryRecordsDataBase, {
-      answer: "no response - refreshed or closed page",
-      selectedItem:"no response - refreshed or closed page",
-      difficulty, 
-      result: false
-    }]
-
-    sendAnswerData(props.match.params.categoryId, {questions:triviaRecords})
-
-    }
+      const questionViwerCheck = () => {
+        if(question!==""){
+          const triviaRecords = [...categoryRecordsDataBase, {
+            answer: "no response - refreshed or closed page",
+            selectedItem:"no response - refreshed or closed page",
+            difficulty, 
+            result: false
+          }]
+          sendAnswerData( categoryId, {questions:triviaRecords})
+          setCategoryRecordsDataBase(triviaRecords)
+          }
+      }
+      
+      questionViwerCheck()
+    
   }, [question])
 
+  const checkDataBase = async () => {
+    const valid = await validateToken();
+    const data = await getResults( categoryId)
+
+    if(data.records.length) {
+      
+      if(data.records[0].questions.length>=numberOfQuestions){
+        return history.push("/report/"+ categoryId)
+      }else if(valid){
+        console.log("valido")
+      }
+
+      setCategoryRecordsDataBase(data.records[0].questions);
+
+    }else{
+        postStartTrivia({data:{ 
+          userId: "001",
+          category:  categoryId
+        }});
+      }
+      return
+  }
   const setNewQuestion = async (questionDifficulty = difficulty) => {
-    const data = await getQuestion(props.match.params.categoryId,questionDifficulty)
+    const data = await getQuestion( categoryId,questionDifficulty)
     setQuestion(decode(data.question));
     setItens(shuffleItens([...data.incorrect_answers, data.correct_answer ]));
     setAnswer(data.correct_answer);
@@ -74,7 +87,8 @@ function Trivia(props) {
     return array
   } 
   const HandleAnswer = async (result, selectedItem) => {
-    
+    categoryRecordsDataBase.pop();
+
     const triviaRecords = [...categoryRecordsDataBase, {
       answer:decode(answer),
       selectedItem,
@@ -82,13 +96,13 @@ function Trivia(props) {
       result
     }]
 
-    await sendAnswerData(props.match.params.categoryId, {questions:triviaRecords})
+    const newData = await sendAnswerData( categoryId, {questions:triviaRecords})
+    await setCategoryRecordsDataBase(newData.newData.questions)
 
-    if(categoryRecordsDataBase.length===numberOfQuestions-1){
-      return history.push("/report/"+props.match.params.categoryId)
-    }
-    setCategoryRecordsDataBase(triviaRecords)
+    checkIfItEnded();
+    
     const newDifficulty = await controllDifficulty(result);
+
     setNewQuestion(newDifficulty);
   }
   const controllDifficulty = (result) => {
@@ -117,16 +131,19 @@ function Trivia(props) {
     
 
   }
-
-  
+  const checkIfItEnded = () => {
+    if(categoryRecordsDataBase.length===numberOfQuestions){
+      return history.push("/report/"+ categoryId-1)
+    }
+  }
   
   return (<>
       
       <div className="trivia__container">
           <div className="category__container">
-            <ContentHeader close={true} text={props.match.params.category}/>
+            <ContentHeader close={true} text={category}/>
           </div>
-          <TriviaQuestion answerResult={HandleAnswer} itens={itens} question={question} difficulty={difficulty} answer={answer} index={categoryRecordsDataBase.length}/>
+          <TriviaQuestion answerResult={HandleAnswer} itens={itens} question={question} difficulty={difficulty} answer={answer} index={categoryRecordsDataBase?.length}/>
         </div>
     </>
   );

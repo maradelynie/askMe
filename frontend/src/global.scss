@@ -281,13 +281,6 @@ body{
     align-items: center;
 }
 
-// @media only screen and (max-width: 400px) {
-//     .category__title{
-//         padding: 0 20px ;
-//         font-size: 28px;
-//     }
-// }
-
 @media only screen and (max-width: 7200px) {
     .category__grid{
         grid-template-columns: 1fr 1fr 1fr;

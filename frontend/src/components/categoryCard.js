@@ -1,14 +1,10 @@
 import React from 'react';
 
 function CatergoryCard(props) {
-  let status = ""
-  if(props.questions>=9){
-    status = "--complete"
-  }
 
   return (
     <>
-        <div onClick={props.onClick} className={"category__card" + status} ><div className="card__content"><h3>{props.category}</h3></div></div>
+        <div onClick={props.onClick} className={"category__card" + props.status()} ><div className="card__content"><h3>{props.category}</h3></div></div>
     </>
   );
 }
