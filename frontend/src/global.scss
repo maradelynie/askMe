@@ -12,6 +12,9 @@ body{
     background-color: $base-color;
     
 }
+.none{
+    display:none !important;
+}
 .card{
     background-color: $base-color-light;
     border-radius: 8px;
@@ -43,7 +46,7 @@ body{
 .main__container{
     max-width: $container;
     margin: auto;
-    padding: 20px;
+    padding: 0 20px 20px 20px;
     
 }
 @media only screen and (max-width: 400px) {
@@ -59,7 +62,7 @@ body{
 }
 .category__title{
     line-height: 2.5em;
-    font-size: 24px;
+    font-size: 44px;
 }
 .category__grid{
     display: grid;  
@@ -86,8 +89,10 @@ body{
     display: flex;
     align-items: flex-end;
 }
-
-.category__header{
+.trivia__title{
+    font-size: 24px;
+}
+.trivia__header{
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -122,14 +127,14 @@ body{
     justify-content: space-between;
     align-items: center;
 }
-.dificulty__container{
+.difficulty__container{
     font-size: 12px;
     background-color: rgba($principal-color, 0.2);
     padding: 5px 10px;
     border-radius: 1em;
     color: $principal-color;
 }
-.icon__dificulty{
+.icon__difficulty{
     font-size: .7em;
 }
 .question__item{
@@ -145,30 +150,28 @@ body{
 .question__text{
     margin: 2em 0 3em;
 }
-.send__button{
+.default__button{
     @extend .clicable;
 
-    background-color: $base-button-color;
+    background-color: $principal-highlight-color;
     color: $base-color-light;
-    width: 150px;
+    width: 100%;
     padding:13px;
     margin: 2em 0 0;
     border: none;
     border-radius: 8px;
+    justify-content: space-evenly;
+    align-items: center;
+    display: flex;
+    font-size: 16px;
+
 }
-@media only screen and (max-width: 700px) {
-    .send__button{
-        width: 100%;
-    }
-}
-.send__button:hover{
+.default__button:disabled{
+    background-color: $base-button-color;
     opacity: 1;
-    background-color: $principal-highlight-color;
+    cursor: default;
 }
-.send__button:active{
-    transform: scale(.98);
-}
-.send__button:focus{
+.default__button:focus{
     outline: none;
 }
 .send__container{
@@ -278,9 +281,10 @@ body{
 .report__details+.report__details{
     border-left: 1px solid $default-border-color;
 }
-.send__container{
-    padding: 0  2em 2em 2em;
-    
+.button__container{
+    width: 100%;
+    display: flex;
+    justify-content: center;    
 }
 @media only screen and (max-width: 440px) {
     .report__detailsList{

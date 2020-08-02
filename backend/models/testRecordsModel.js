@@ -12,7 +12,7 @@ let schema = mongoose.Schema({
     required: true
 },
   questions: [{
-    questionId: String, 
+    answer: String, 
     selectedItem: String,
     difficulty: String,
     result: Boolean,

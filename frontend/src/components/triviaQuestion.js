@@ -1,16 +1,20 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import QuestionLevel from './questionLevel';
 import QuestionItem from './questionItem';
 import DefaultButton from './defaultButton';
+import { decode } from 'js-base64';
 
 import Notification from './notification';
 
 function TriviaQuestion(props) {
+  const [notificationStatus, setNotificationStatus] = useState(false)
+  const [notificationType, setNotificationType] = useState(false)
+  const [disableAnser, setDisableAnser] = useState(true)
 
-  const selectItem = (el) => {
+  const selectItem = (el) => { 
     getAllElments().map(item => item.classList.remove("question__item--selected"))
-
     el.classList.add("question__item--selected");
+    setDisableAnser(false)
   }
   const getAllElments = () => {
     const elements = document.querySelectorAll('.question__item');
@@ -19,35 +23,31 @@ function TriviaQuestion(props) {
 
     return all
   }
-  const shuffleArray = (all) => {
-    const array = all;
-    for (let i = array.length - 1; i > 0; i--) {
-        let j = Math.floor(Math.random() * (i + 1));
-        let temp = array[i];
-        array[i] = array[j];
-        array[j] = temp;
-    }
-    return array
-  }
-  const send = () => {
+  const answer = async () => {
     const selected = getAllElments().find(element => element.classList.contains("question__item--selected"))
-    console.log(selected.innerHTML)
-  }
-  const itens = shuffleArray([...props.data.incorrect_answers, props.data.correct_answer ]);
+    if(selected.innerHTML===decode(props.answer)){
+      await setNotificationType(true)
+    }else {
+      await setNotificationType(false)
 
+    }
+    setNotificationStatus(true)
+  }
+  
+  
   return (
     <>
-      <Notification status={true} type={false} setStatus={"teste"}/>
+      <Notification action={() => props.answerResult(notificationType)} status={notificationStatus} type={notificationType} setNotificationStatus={setNotificationStatus}/>
       <div className="question__card">
         <div className="question__header">
           <h3 className="question__title"> Question {props.index}</h3>
-          <QuestionLevel dificulty={props.data.difficulty}/>
+          <QuestionLevel difficulty={props.difficulty}/>
         </div>
-        <p  className="question__text">{props.data.question}</p>
-        {itens?.map((item,index) =>{
-          return <QuestionItem key={index} selectItem={selectItem} item={item} />
+        <p  className="question__text">{props.question}</p>
+        {props.itens?.map((item,index) =>{
+          return <QuestionItem key={index} selectItem={selectItem} item={decode(item)} />
         })}
-        <DefaultButton action={send} text="Answer"/>
+        <DefaultButton disabled={disableAnser} action={answer} text="Answer"/>
       </div>
     </>
   );

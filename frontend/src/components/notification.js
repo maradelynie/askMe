@@ -9,6 +9,11 @@ function Notification(props) {
   const icon = props.type ? faCheckCircle:faTimesCircle;
   const text = props.type ? "You're right!":"You're wrong!";
 
+  const action = () => {
+    props.action()
+    props.setNotificationStatus(false)
+  }
+
   const renderNotification = () => {
     if(props.status){
       return (
@@ -17,7 +22,7 @@ function Notification(props) {
           <div className={card}>
             <FontAwesomeIcon className={iconClass} icon={icon}/>
             <h3>{text}</h3>
-            <DefaultButton action={()=> console.log("next")} text={"Next"}/>
+            <DefaultButton iconBefore={true} action={action} text={"Next"}/>
 
           </div>
         </div>

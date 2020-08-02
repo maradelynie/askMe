@@ -6,22 +6,22 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 function QuestionLevel(props) {
   const renderStars = () =>{
     
-    if(props.dificulty==="hard"){
+    if(props.difficulty==="hard"){
       return (<>
-          <FontAwesomeIcon className="icon__dificulty" icon={faStar}/> 
-          <FontAwesomeIcon className="icon__dificulty" icon={faStar}/> 
-          <FontAwesomeIcon className="icon__dificulty" icon={faStar}/> Hard
+          <FontAwesomeIcon className="icon__difficulty" icon={faStar}/> 
+          <FontAwesomeIcon className="icon__difficulty" icon={faStar}/> 
+          <FontAwesomeIcon className="icon__difficulty" icon={faStar}/> Hard
         </>
         )
-    }else if(props.dificulty==="medium"){
+    }else if(props.difficulty==="medium"){
       return (<>
-          <FontAwesomeIcon className="icon__dificulty" icon={faStar}/> 
-          <FontAwesomeIcon className="icon__dificulty" icon={faStar}/> Medium
+          <FontAwesomeIcon className="icon__difficulty" icon={faStar}/> 
+          <FontAwesomeIcon className="icon__difficulty" icon={faStar}/> Medium
         </>
         )
     }else {
       return (<>
-          <FontAwesomeIcon className="icon__dificulty" icon={faStar}/> Easy
+          <FontAwesomeIcon className="icon__difficulty" icon={faStar}/> Easy
         </>
         )
     }
@@ -29,7 +29,7 @@ function QuestionLevel(props) {
   }
   
   return (
-    <div  className="dificulty__container">
+    <div  className="difficulty__container">
       {renderStars()}
     </div>
   );

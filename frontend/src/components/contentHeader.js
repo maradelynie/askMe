@@ -8,8 +8,8 @@ function ContentHeader(props) {
     }
   }
   return (
-    <div className="category__header">
-      <h1 className="category__title">{props.text}</h1> 
+    <div className="trivia__header">
+      <h1 className="trivia__title">{props.text}</h1> 
       {renderClose()}
     </div>
   );

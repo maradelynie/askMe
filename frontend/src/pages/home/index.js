@@ -1,21 +1,36 @@
-import React from 'react';
-import ContentHeader from '../../components/contentHeader';
+import React,{useEffect, useState} from 'react';
 import CategoryCard from '../../components/categoryCard';
+import {useHistory} from 'react-router-dom'
+import {getCategory,getAllTests} from '../../services'
+
 
 function Home() {
+  const history = useHistory();
+  const [categoryList, setCategoryList] = useState([])
+
+  useEffect(() => {
+    const getList = async () => {
+      setCategoryList(await getCategory())
+      
+    }
+    getList();
+
+    
+  }, [])
+
   return (
     <>
     <div className="category__container">
-      <ContentHeader close={false} text="Categorias"/>
+     
+        <h1 className="category__title">Category</h1> 
+      
     </div>
       <div className="category__grid">
 
-        <CategoryCard category="História" />
-        <CategoryCard category="Geografia" />
-        <CategoryCard category="Mitologia" />
-        <CategoryCard category="Esportes" />
-        <CategoryCard category="Politica" />
-        <CategoryCard category="Conhecimento Geral" />
+        {categoryList?.map(category => 
+          <CategoryCard key={category.id} onClick={() => history.push(`/trivia/${category.id}/${category.name}`)} category={category.name} />
+        )}
+        
         
       </div>
     </>

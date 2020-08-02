@@ -1,14 +1,31 @@
 import React from 'react';
+import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-function SendButton(props) {
+function DefaultButton(props) {
  
+ const desble = () => {
+  if(props.disabled===true){
+    return  true
+  }
+  return false
+}
+const iconBefore = () => {
+  if(props.iconBefore){
+    return <FontAwesomeIcon className="icon__dificulty" icon={faArrowRight}/> 
+  }
+         
+}
+
+
   return (
-    <div className="send__container">
-      <button onClick={props.action}  className="send__button">
+    <div className="button__container">
+      <button onClick={props.action} disabled={desble()} className="default__button">
         {props.text}
+        {iconBefore()}
       </button>
     </div>
   );
 }
 
-export default SendButton;
+export default DefaultButton;

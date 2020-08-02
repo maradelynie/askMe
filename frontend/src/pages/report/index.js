@@ -1,27 +1,46 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import DefaultButton from '../../components/defaultButton';
+import MonterDrawing from '../../components/monterDrawing';
+import {useHistory} from 'react-router-dom'
+import {getResults} from '../../services';
 
-function Report() {
+function Report(props) {
+  const history = useHistory();
+  const [results, setresults] = useState({})
+
+  useEffect(() => {
+    const getData = async () => {
+      formatData(await getResults(props.match.params.categoryId))
+    }
+    getData();
+  },[])
+
+  const formatData = (data) => {
+    const formated = {
+      correct: data.filter(item => item.result===true).length,
+      wrong: data.filter(item => item.result===false).length,
+      easy: {
+        correct: data.filter(item => item.difficulty==="easy").filter(item => item.result===true).length,
+        wrong: data.filter(item => item.difficulty==="easy").filter(item => item.result===false).length
+      },
+      medium: {
+        correct: data.filter(item => item.difficulty==="medium").filter(item => item.result===true).length,
+        wrong: data.filter(item => item.difficulty==="medium").filter(item => item.result===false).length
+      },
+      hard: {
+        correct: data.filter(item => item.difficulty==="hard").filter(item => item.result===true).length,
+        wrong: data.filter(item => item.difficulty==="hard").filter(item => item.result===false).length
+      },
+    }
+    setresults(formated)
+  }
+  
   return (
     <>
     <main className="Main__container">
       <div  className="report__card">
         <div className="report__header">
-          <div className="report__image">
-            <div className="imge-shadow"></div>
-            <div className="imge-body"></div>
-            <div className="imge-arms"></div>
-            <div className="imge-leg1"></div>
-            <div className="imge-feet1"></div>
-            <div className="imge-leg2"></div>
-            <div className="imge-feet2"></div>
-            <div className="imge-mouth"></div>
-            <div className="imge-mouth2"></div>
-            <div className="imge-mouth3"></div>
-            <div className="imge-eye1"></div>
-            <div className="imge-eye2"></div>
-            <div className="imge-hat1"></div>
-          </div>
+          <MonterDrawing />
           <div  className="report__headerText"><h2>Congratulations!</h2><span>Você finalizou o teste</span></div>
         </div>
         <div className="report__performanceCard">
@@ -31,13 +50,13 @@ function Report() {
         <div className="report__results">
           <label>
             <span className="report__resultsNumber">
-              7
+              {results?.correct}
             </span>
             Correct
           </label>
           <label>
             <span className="report__resultsNumber">
-              3
+            {results?.wrong}
             </span>
             Wrong
           </label>
@@ -48,26 +67,26 @@ function Report() {
           <div className="report__details">
             <div className="report__data">
             <h4>Easy</h4>
-            <p>Correct: 2</p>
-            <p>Wrong: 1</p>
+            <p>Correct: {results?.easy?.correct}</p>
+            <p>Wrong: {results?.easy?.wrong}</p>
             </div>
           </div>
           <div className="report__details">
           <div className="report__data">
             <h4>Medium</h4>
-            <p>Correct: 3</p>
-            <p>Wrong: 1</p>
+            <p>Correct: {results?.medium?.correct}</p>
+            <p>Wrong: {results?.medium?.wrong}</p>
             </div>
           </div>
           <div className="report__details">
           <div className="report__data">
             <h4>Hard</h4>
-            <p>Correct: 2</p>
-            <p>Wrong: 1</p>
+            <p>Correct: {results?.hard?.correct}</p>
+            <p>Wrong: {results?.hard?.wrong}</p>
             </div>
           </div>
         </div>
-        <DefaultButton action={"send"} text="Back to Home"/>
+        <DefaultButton action={() => history.push("/")} text="Back to Home"/>
 
       </div>
     </main>
