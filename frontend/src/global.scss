@@ -34,53 +34,79 @@ body{
 }
 
 
-.header__container{
-    background-color: $principal-color;
-    padding: 1em;
-}
-.header__title{
-    font-size: 18px;
-    color: $text-color-light;
-    font-weight: normal;
-}
-.main__container{
-    max-width: $container;
-    margin: auto;
-    padding: 0 20px 20px 20px;
-    
-}
-@media only screen and (max-width: 400px) {
-    .main__container{
-        padding: 0px;
-    }
-    .category__title{
-        padding: 0 20px ;
+// -----------------------------------------------global
 
-    }
-}.category__container{
-    padding: 1em 0;
+.icon__close{
+    border: 2px solid #000000;
+    border-radius: 50%;
+    padding: 1px;
+    min-width: 1em;
+    height: 1em;
+    margin-right: 5px;
 }
-.category__title{
-    line-height: 2.5em;
-    font-size: 44px;
+.close__content{
+    @extend .clicable;
 }
-.category__grid{
-    display: grid;  
-    // flex-wrap: wrap;
-    grid-template-columns: 1fr 1fr 1fr 1fr;
-    gap: 1em;
+
+
+
+
+
+
+// -------------------------------------------------close component
+
+
+
+
+
+
+
+
+.difficulty__container{
+    font-size: 12px;
+    background-color: rgba($principal-color, 0.2);
+    padding: 5px 10px;
+    border-radius: 1em;
+    color: $principal-color;
+    display: flex;
     align-items: center;
 }
-@media only screen and (max-width: 580px) {
-    .category__grid{
-        grid-template-columns: 1fr 1fr 1fr;
-    }
+.icon__difficulty{
+    font-size: .7em;
 }
-@media only screen and (max-width: 440px) {
-    .category__grid{
-        grid-template-columns: 1fr 1fr;
-    }
+
+
+
+
+
+
+// ----------------------------------------------------Level component
+
+
+
+
+
+.question__item{
+    @extend .card;
+    @extend .clicable;
+    box-sizing: content-box;
+    margin: 1em 0;
 }
+.question__item--selected{
+    @extend .question__item;
+    border: 3px solid $principal-highlight-color;
+}
+
+
+
+
+
+
+// -----------------------------------------------------question item component
+
+
+
+
 .category__card{
     @extend .card;
     @extend .clicable;
@@ -93,30 +119,12 @@ body{
     @extend .category__card;
     opacity: .3;
 }
-.trivia__title{
-    font-size: 24px;
-}
-.trivia__header{
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
 
-}
-.icon__close{
-    border: 2px solid #000000;
-    border-radius: 50%;
-    padding: 1px;
-    min-width: 1em;
-    height: 1em;
-    margin-right: 5px;
-}
-.close__content{
-    @extend .clicable;
-}
-.trivia__container{
-    max-width: 700px;
-    margin: auto;
-}
+
+
+// ----------------------------------------------------category card component
+
+
 .question__card{
     @extend .card;
     padding: 2em;
@@ -131,29 +139,21 @@ body{
     justify-content: space-between;
     align-items: center;
 }
-.difficulty__container{
-    font-size: 12px;
-    background-color: rgba($principal-color, 0.2);
-    padding: 5px 10px;
-    border-radius: 1em;
-    color: $principal-color;
-}
-.icon__difficulty{
-    font-size: .7em;
-}
-.question__item{
-    @extend .card;
-    @extend .clicable;
-    box-sizing: content-box;
-    margin: 1em 0;
-}
-.question__item--selected{
-    @extend .question__item;
-    border: 3px solid $principal-highlight-color;
-}
+
+
 .question__text{
     margin: 2em 0 3em;
 }
+
+
+// ----------------------------------------------------question component
+
+
+
+
+
+
+
 .default__button{
     @extend .clicable;
 
@@ -178,23 +178,15 @@ body{
 .default__button:focus{
     outline: none;
 }
-.send__container{
-    display: flex;
-    justify-content: center;
-    width: 100%;
-}
-.notification__container{
-    background-color: rgba($text-color-dark, .5);
-    position: fixed;
-    top:0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: 10;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
+
+
+
+
+
+
+// ----------------------------------------------------------Button component
+
+
 .notification__card{
     @extend .card;
     width: 100%;
@@ -206,6 +198,10 @@ body{
     justify-content: center;
     align-items: center;
     
+}
+.notification__btnContainer{
+    width: 100%;
+    max-width: 150px;
 }
 .icon__notification{
     font-size: 3.5em;
@@ -229,6 +225,148 @@ body{
     @extend .notification__card;
     border: 3px solid #FF6660;
 }
+
+
+
+// --------------------------------------------------------------Notification Container
+
+
+
+.header__container{
+    background-color: $principal-color;
+    padding: 1em;
+}
+.header__title{
+    font-size: 18px;
+    color: $text-color-light;
+    font-weight: normal;
+}
+.main__container{
+    max-width: $container;
+    margin: auto;
+    padding: 0 20px 20px 20px;
+    
+}
+@media only screen and (max-width: 400px) {
+    .main__container{
+        padding: 0px;
+    }
+}
+
+
+
+
+
+
+// --------------------------------------------------principal layout
+
+
+
+
+
+
+
+.category__container{
+    padding: 1em 0;
+}
+.category__title{
+    line-height: 2.5em;
+    font-size: 44px;
+}
+.category__grid{
+    display: grid;  
+    // flex-wrap: wrap;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    gap: 1em;
+    align-items: center;
+}
+
+// @media only screen and (max-width: 400px) {
+//     .category__title{
+//         padding: 0 20px ;
+//         font-size: 28px;
+//     }
+// }
+
+@media only screen and (max-width: 7200px) {
+    .category__grid{
+        grid-template-columns: 1fr 1fr 1fr;
+    }
+    .category__title{
+        padding: 0 20px ;
+        font-size: 36px;
+    }
+}
+@media only screen and (max-width: 550px) {
+    .category__grid{
+        grid-template-columns: 1fr 1fr;
+    }
+    .category__title{
+        font-size: 28px;
+    }
+}
+
+
+
+
+
+
+// ----------------------------------------------------------category page
+
+
+
+
+
+.trivia__title{
+    font-size: 24px;
+}
+.trivia__header{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+}
+.trivia__btnContainer{
+    margin: auto;
+    max-width: 150px;
+}
+
+
+.trivia__container{
+    max-width: 700px;
+    margin: auto;
+}
+
+@media only screen and (max-width: 750px) {
+    .trivia__btnContainer{
+        max-width: unset;
+    }
+}
+
+
+
+
+// ----------------------------------------------------------Trivia page
+
+
+
+
+.notification__container{
+    background-color: rgba($text-color-dark, .5);
+    position: fixed;
+    top:0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 10;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+// ----------------------------------------------------------Notification page
+
 .report__card{
     @extend .card;
     overflow: hidden;
@@ -236,6 +374,7 @@ body{
     display: flex;
     flex-direction: column;
     align-items: center;
+    margin-top: 1.5em;
 }
 .report__header{
     background-color: rgba($principal-highlight-color, 0.7);
@@ -290,6 +429,9 @@ body{
     display: flex;
     justify-content: center;    
 }
+.report__headerText{
+    padding: 2em;
+}
 @media only screen and (max-width: 440px) {
     .report__detailsList{
         display: block;
@@ -302,9 +444,23 @@ body{
         margin-top: 2em;
     }
 }
-.report__headerText{
-    padding: 2em;
+.report__btnContainer{
+    width: 100%;
+    max-width: 150px;
+    margin: 0 2em 2em 2em;
 }
+
+
+
+
+
+
+// -----------------------------------------------------------Report Page
+
+
+
+
+
 
 
 .report__image{
@@ -315,6 +471,7 @@ body{
     position: relative;
 
 }
+
 .imge-body{
     background-color: #2F2E41;
     position: absolute;

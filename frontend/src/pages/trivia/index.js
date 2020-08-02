@@ -126,7 +126,7 @@ function Trivia(props) {
           <div className="category__container">
             <ContentHeader close={true} text={props.match.params.category}/>
           </div>
-          <TriviaQuestion answerResult={HandleAnswer} itens={itens} question={question} difficulty={difficulty} answer={answer} index={1}/>
+          <TriviaQuestion answerResult={HandleAnswer} itens={itens} question={question} difficulty={difficulty} answer={answer} index={categoryRecordsDataBase.length}/>
         </div>
     </>
   );

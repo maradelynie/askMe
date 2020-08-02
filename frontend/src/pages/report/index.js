@@ -87,8 +87,9 @@ function Report(props) {
             </div>
           </div>
         </div>
-        <DefaultButton action={() => history.push("/")} text="Back to Home"/>
-
+        <div  className="report__btnContainer">
+          <DefaultButton action={() => history.push("/")} text="Back to Home"/>
+        </div>
       </div>
     </main>
     </>

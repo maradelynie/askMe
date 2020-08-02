@@ -12,6 +12,8 @@ function Notification(props) {
   const action = () => {
     props.action()
     props.setNotificationStatus(false)
+    props.clearSelection()
+    props.clearData()
   }
 
   const renderNotification = () => {
@@ -22,7 +24,9 @@ function Notification(props) {
           <div className={card}>
             <FontAwesomeIcon className={iconClass} icon={icon}/>
             <h3>{text}</h3>
-            <DefaultButton iconBefore={true} action={action} text={"Next"}/>
+            <div className="notification__btnContainer">
+              <DefaultButton iconBefore={true} action={action} text={"Next"}/>
+            </div>
 
           </div>
         </div>

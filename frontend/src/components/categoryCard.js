@@ -2,7 +2,7 @@ import React from 'react';
 
 function CatergoryCard(props) {
   let status = ""
-  if(props.questions>=10){
+  if(props.questions>=9){
     status = "--complete"
   }
 

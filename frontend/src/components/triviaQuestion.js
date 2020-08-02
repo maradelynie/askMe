@@ -35,11 +35,18 @@ function TriviaQuestion(props) {
     }
     setNotificationStatus(true)
   }
+  const clearSelection = () => {
+    getAllElments().map(item => item.classList.remove("question__item--selected"))
+  }
+  const clearData = () => {
+    document.querySelector('.question__text').innerHTML="&nbsp;";
+    getAllElments().map(item => item.innerHTML="&nbsp;")
+  }
   
   
   return (
     <>
-      <Notification action={() => props.answerResult(notificationType, selected)} status={notificationStatus} type={notificationType} setNotificationStatus={setNotificationStatus}/>
+      <Notification clearData={clearData} clearSelection={clearSelection} action={() => props.answerResult(notificationType, selected)} status={notificationStatus} type={notificationType} setNotificationStatus={setNotificationStatus}/>
       <div className="question__card">
         <div className="question__header">
           <h3 className="question__title"> Question {props.index}</h3>
@@ -49,7 +56,9 @@ function TriviaQuestion(props) {
         {props.itens?.map((item,index) =>{
           return <QuestionItem key={index} selectItem={selectItem} item={decode(item)} />
         })}
-        <DefaultButton disabled={disableAnser} action={answer} text="Answer"/>
+        <div className="trivia__btnContainer">
+          <DefaultButton disabled={disableAnser} action={answer} text="Answer"/>
+        </div>
       </div>
     </>
   );
