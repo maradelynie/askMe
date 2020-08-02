@@ -15,7 +15,8 @@ function Report(props) {
     getData();
   },[])
 
-  const formatData = (data) => {
+  const formatData = (response) => {
+    const data = response.records[0].questions
     const formated = {
       correct: data.filter(item => item.result===true).length,
       wrong: data.filter(item => item.result===false).length,
@@ -41,7 +42,7 @@ function Report(props) {
       <div  className="report__card">
         <div className="report__header">
           <MonterDrawing />
-          <div  className="report__headerText"><h2>Congratulations!</h2><span>Você finalizou o teste</span></div>
+          <div  className="report__headerText"><h2>Congratulations!</h2><span>Your finished your test.</span></div>
         </div>
         <div className="report__performanceCard">
           <h3>Check out your performance</h3>

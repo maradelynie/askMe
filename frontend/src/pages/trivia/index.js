@@ -4,24 +4,58 @@ import TriviaQuestion from '../../components/triviaQuestion';
 import { decode } from 'js-base64';
 import {useHistory} from 'react-router-dom'
 
-import {getQuestion} from '../../services';
+import {getQuestion,postStartTrivia,getResults,sendAnswerData} from '../../services';
 
 
 function Trivia(props) {
   const history = useHistory();
-
+  const numberOfQuestions = 10
   const [difficulty, setDifficulty] = useState("medium")
   const [question, setQuestion] = useState("")
   const [itens, setItens] = useState([])
   const [answer, setAnswer] = useState("")
   const difficultyOptions = ["easy","medium", "hard"]
   const [difficultyChangeCounter, setDifficultyChangeCounter] = useState([])
-  const [respostas, setRespostas] = useState([])
+  const [categoryRecordsDataBase, setCategoryRecordsDataBase] = useState([])
 
   useEffect(() => {
+    const checkDataBase = async () => {
+      const data = await getResults(props.match.params.categoryId)
+      console.log(data)
+    if(data.records.length) {
+      if(data.records[0].questions.length>=numberOfQuestions-1){
+        return history.push("/report/"+props.match.params.categoryId)
+      }
+      setCategoryRecordsDataBase(data.records[0].questions);
+    }else{
+      console.log("nao tem")
+
+        postStartTrivia({data:{ 
+          userId: "001",
+          category: props.match.params.categoryId
+        }});
+      }
+    }
+
+    checkDataBase();
     setNewQuestion();
     
   }, [])
+
+  useEffect(() => {
+    if(question!==""){
+
+    const triviaRecords = [...categoryRecordsDataBase, {
+      answer: "no response - refreshed or closed page",
+      selectedItem:"no response - refreshed or closed page",
+      difficulty, 
+      result: false
+    }]
+
+    sendAnswerData(props.match.params.categoryId, {questions:triviaRecords})
+
+    }
+  }, [question])
 
   const setNewQuestion = async (questionDifficulty = difficulty) => {
     const data = await getQuestion(props.match.params.categoryId,questionDifficulty)
@@ -39,15 +73,23 @@ function Trivia(props) {
     }
     return array
   } 
-  const HandleAnswer = async (result) => {
-    //enviar para o bancode dados
-    if(respostas.length===2){
-      history.push("/report/"+props.match.params.categoryId)
-    }
-    setRespostas([...respostas, {difficulty, result}])
+  const HandleAnswer = async (result, selectedItem) => {
+    
+    const triviaRecords = [...categoryRecordsDataBase, {
+      answer:decode(answer),
+      selectedItem,
+      difficulty, 
+      result
+    }]
 
-    const dif = await controllDifficulty(result);
-    setNewQuestion(dif);
+    await sendAnswerData(props.match.params.categoryId, {questions:triviaRecords})
+
+    if(categoryRecordsDataBase.length===numberOfQuestions-1){
+      return history.push("/report/"+props.match.params.categoryId)
+    }
+    setCategoryRecordsDataBase(triviaRecords)
+    const newDifficulty = await controllDifficulty(result);
+    setNewQuestion(newDifficulty);
   }
   const controllDifficulty = (result) => {
     // the countes difficultyChangeCounter must will keep the last result if the 
@@ -75,6 +117,8 @@ function Trivia(props) {
     
 
   }
+
+  
   
   return (<>
       

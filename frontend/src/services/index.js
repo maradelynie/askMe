@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const baseTrivia = "https://opentdb.com/";
-const baseDataBase = "http://localhost:3001/api/testResults/0012";
+const baseDataBase = "http://localhost:3001/api/testResults/001";
 
 const apiTrivia = axios.create({
     baseURL: baseTrivia,
@@ -25,11 +25,20 @@ export async function getQuestion(categoryId, difficulty)  {
 
 export async function getResults(categoryId)  {
   const response = await apiDataBase.get(categoryId);
-  
-  return response.data.records[0].questions
+  console.log(response.data)
+  return response.data
 } 
 
 export async function getAllTests()  {
   const response = await apiDataBase.get();
   return response.data.records
+} 
+export async function sendAnswerData(categoryId, data)  {
+  const response = await apiDataBase.put(categoryId, data);
+  console.log(response.data)
+  return response.data
+} 
+export async function postStartTrivia(data)  {
+  const response = await apiDataBase.post(null, null , data);
+  return response.data
 } 

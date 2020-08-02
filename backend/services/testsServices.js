@@ -37,7 +37,7 @@ async function update(req, res) {
     }
 
     try{
-        const record = await testRecords.findOneAndUpdate({_id: req.params.id}, req.body, {new: true,useFindAndModify:false});
+        const record = await testRecords.findOneAndUpdate({category: req.params.category}, req.body, {new: true,useFindAndModify:false});
         res.send({res:true, newData:record})
 
     } catch (error) {
@@ -45,6 +45,7 @@ async function update(req, res) {
     }
   
 }
+
 
 const testRecords = require('../models/testRecordsModel');
 

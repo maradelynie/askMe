@@ -10,6 +10,7 @@ function TriviaQuestion(props) {
   const [notificationStatus, setNotificationStatus] = useState(false)
   const [notificationType, setNotificationType] = useState(false)
   const [disableAnser, setDisableAnser] = useState(true)
+  const [selected, setSelected] = useState("")
 
   const selectItem = (el) => { 
     getAllElments().map(item => item.classList.remove("question__item--selected"))
@@ -24,8 +25,9 @@ function TriviaQuestion(props) {
     return all
   }
   const answer = async () => {
-    const selected = getAllElments().find(element => element.classList.contains("question__item--selected"))
-    if(selected.innerHTML===decode(props.answer)){
+    const selectedItem = getAllElments().find(element => element.classList.contains("question__item--selected")).innerHTML
+    await setSelected(selectedItem)
+    if(selectedItem===decode(props.answer)){
       await setNotificationType(true)
     }else {
       await setNotificationType(false)
@@ -37,7 +39,7 @@ function TriviaQuestion(props) {
   
   return (
     <>
-      <Notification action={() => props.answerResult(notificationType)} status={notificationStatus} type={notificationType} setNotificationStatus={setNotificationStatus}/>
+      <Notification action={() => props.answerResult(notificationType, selected)} status={notificationStatus} type={notificationType} setNotificationStatus={setNotificationStatus}/>
       <div className="question__card">
         <div className="question__header">
           <h3 className="question__title"> Question {props.index}</h3>
