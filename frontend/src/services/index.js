@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const baseTrivia = "https://opentdb.com/";
-const baseDataBase = "http://localhost:3001/api/testResults/001";
+const baseDataBase ="http://localhost:3001/api/testResults/001";
 
 const apiTrivia = axios.create({
     baseURL: baseTrivia,
