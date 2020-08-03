@@ -1,7 +1,5 @@
 @import "../../global.scss";
 
-
-
 .category__container{
     padding: 1em 0;
 }
@@ -13,6 +11,8 @@
     display: grid;  
     // flex-wrap: wrap;
     grid-template-columns: 1fr 1fr 1fr 1fr;
+    padding: 0 10px;
+
     gap: 1em;
     align-items: center;
 }

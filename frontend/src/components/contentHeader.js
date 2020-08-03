@@ -1,5 +1,6 @@
 import React from 'react';
 import Close from '../components/close';
+import './contentHeader.scss';
 
 function ContentHeader(props) {
   const renderClose = () => {
