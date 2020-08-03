@@ -1,16 +1,24 @@
 const INITIAL_STATE = {
-    test: "teste",
-    testeee: "initial"
+    categoryId : "",
+    categoryName : ""
+    
 }
 
 function reducer(state = INITIAL_STATE, action){
     switch (action.type) {
-        case "DOIT":
+        case "SET_CATEGORYNAME":
             
             return {
                 ...state,
-                test:"mara"
+                categoryId: action.value
             }
+            case "SET_CATEGORYID":
+            
+            return {
+                ...state,
+                categoryName: action.value
+            }
+                    
     
         default:
             return state

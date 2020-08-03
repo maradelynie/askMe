@@ -2,12 +2,17 @@ import React,{useEffect, useState} from 'react';
 import CategoryCard from '../../components/categoryCard';
 import {useHistory} from 'react-router-dom'
 import {getCategory,getAllTests,validateToken} from '../../services'
+import {useDispatch} from "react-redux";
+
+import {setCategoryId,setCategoryName} from "../../actions";
 
 
 function Home() {
   const history = useHistory();
+  const dispatch = useDispatch();
   const [categoryList, setCategoryList] = useState([])
   const [allTests, setAllTests] = useState([])
+
 
   useEffect(() => {
     const getList = async () => {
@@ -18,11 +23,14 @@ function Home() {
     getList();
   }, [])
 
-  const goTo = (questions, id, name) => {
+  const goTo = (questions,id,name) => {
+    dispatch(setCategoryId(id))
+    dispatch(setCategoryName(name))
+
     if(questions>=10){
-      return history.push(`/report/${id}`)
+      return history.push(`/report/`)
     }
-    return history.push(`/trivia/${id}/${name}`)
+    return history.push(`/trivia/`)
   }
   const cardStatus = (questions) => {
     if(questions>=10){
@@ -44,7 +52,7 @@ function Home() {
           const searchTestResponse = allTests.find(test => test.category===String(category.id))
           const numberOfQuestions = searchTestResponse?.questions?.length;
 
-           return <CategoryCard status={() => cardStatus(numberOfQuestions)} key={category.id} onClick={() => goTo(numberOfQuestions,category.id,category.name)} category={category.name} />
+           return <CategoryCard status={() => cardStatus(numberOfQuestions)} key={category.id} onClick={()=>goTo(numberOfQuestions,category.name,category.id)} category={category.name} />
         })}
         
         

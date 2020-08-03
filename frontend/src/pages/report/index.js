@@ -4,13 +4,21 @@ import MonterDrawing from '../../components/monterDrawing';
 import {useHistory} from 'react-router-dom'
 import {getResults} from '../../services';
 
-function Report(props) {
+import {useSelector} from "react-redux";
+
+function Report() {
   const history = useHistory();
   const [results, setresults] = useState({})
 
+  const {categoryId, categoryName} = useSelector(state => state);
+
+
   useEffect(() => {
+    console.log(categoryId)
+    console.log(categoryName)
+    const id = String(categoryId)
     const getData = async () => {
-      formatData(await getResults(props.match.params.categoryId))
+      formatData(await getResults(id))
     }
     getData();
   },[])
@@ -42,7 +50,7 @@ function Report(props) {
       <div  className="report__card">
         <div className="report__header">
           <MonterDrawing />
-          <div  className="report__headerText"><h2>Congratulations!</h2><span>Your finished your test.</span></div>
+          <div  className="report__headerText"><h2>Congratulations!</h2><span>Your finished your {categoryName} test.</span></div>
         </div>
         <div className="report__performanceCard">
           <h3>Check out your performance</h3>

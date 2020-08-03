@@ -11,8 +11,8 @@ export default function Routes(){
         <BrowserRouter >
             <Switch>
                 <Route path={`/`} exact component={Home} />
-                <Route path={`/trivia/:categoryId/:category`}  component={Trivia} />
-                <Route path={`/report/:categoryId`}  component={Report} />
+                <Route path={`/trivia/`}  component={Trivia} />
+                <Route path={`/report/`}  component={Report} />
             </Switch>
         </BrowserRouter>
     )

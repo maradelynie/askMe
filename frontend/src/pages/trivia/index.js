@@ -1,8 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import { decode } from 'js-base64';
 import {useHistory} from 'react-router-dom';
-import {useSelector, useDispatch} from "react-redux";
-import {doIt} from "../../actions";
+import {useSelector} from "react-redux";
 
 import ContentHeader from '../../components/contentHeader';
 import TriviaQuestion from '../../components/triviaQuestion';
@@ -34,9 +33,10 @@ export function controllDifficulty (result, resultsArray, difficulty) {
   return {resultsArray,difficulty}
 };
 export async function updateData (resultsList, data ,categoryId) {
+  const id = String(categoryId)
 
   const triviaRecords = [...resultsList, data]
-  const newData = await sendAnswerData( categoryId, {questions:triviaRecords})
+  const newData = await sendAnswerData( id, {questions:triviaRecords})
   
   return newData.newData.questions
 }
@@ -58,21 +58,18 @@ function shuffleItens(itens){
 } 
 
 
-function Trivia(props) {
+function Trivia() {
   const history = useHistory();
-  const {categoryId, category} = props.match.params;
   const numberOfQuestions = 10;
 
   const [question, setQuestion] = useState("")
-  const [difficultyChangeCounter, setDifficultyChangeCounter] = useState([])
   const [resultsList, setResultsList] = useState([])
+  const [difficultyAccumulator, setDifficultyAccumulator] = useState([])
 
-  const dispatch = useDispatch();
-  const store = useSelector(state => state);
-  console.log(store)
+  const {categoryId, categoryName} = useSelector(state => state);
+  
 
   useEffect(() => {
-    dispatch(doIt())
     const start = async () => {
       await checkDataBase()
       setNewQuestion("medium")
@@ -85,6 +82,8 @@ function Trivia(props) {
 
   useEffect(() => {
       const questionViwerCheck = async () => {
+        const id = String(categoryId)
+
         if(question!==""){
           
           const data = {
@@ -93,7 +92,7 @@ function Trivia(props) {
             difficulty: "medium", 
             result: false
           }
-          const newData = await updateData(resultsList,data,categoryId);
+          const newData = await updateData(resultsList,data,id);
           
           await setResultsList(newData)
           }
@@ -104,19 +103,20 @@ function Trivia(props) {
   }, [question])
 
   const checkDataBase = async () => {
+    const id = String(categoryId)
     const valid = await validateToken();
-    const data = (await getResults(categoryId));
-    if(data.records[0]) {
+    const data = await getResults(id);
+    if(data.records.length>0) {
 
       if(checkEnd(data.records[0].questions ,numberOfQuestions)){
-        return history.push("/report/"+ categoryId)
+        return history.push("/report/")
       }
       await setResultsList(data.records[0].questions);
 
     }else{
         postStartTrivia({data:{ 
           userId: "001",
-          category:  categoryId
+          category:  String(categoryId)
         }});
       }
       return
@@ -149,20 +149,20 @@ function Trivia(props) {
     const newData = await updateData(resultsList,data,categoryId);
     await setResultsList(newData)
     if(checkEnd(resultsList,numberOfQuestions)){
-      history.push("/report/"+ categoryId)
+      history.push("/report/")
     };
     
-    const newDifficulty = controllDifficulty(result,difficultyChangeCounter,question.difficulty);
+    const newDifficulty = controllDifficulty(result,difficultyAccumulator,question.difficulty);
 
     setNewQuestion(newDifficulty.difficulty);
-    setDifficultyChangeCounter(newDifficulty.resultsArray)
+    setDifficultyAccumulator(newDifficulty.resultsArray)
   }
 
   return (<>
       
       <div className="trivia__container">
           <div className="category__container">
-            <ContentHeader close={true} text={category}/>
+            <ContentHeader close={true} text={categoryName}/>
           </div>
           <TriviaQuestion answerResult={HandleAnswer} itens={question.itens} question={question.question} difficulty={question.difficulty} answer={question.answer} index={resultsList?.length}/>
         </div>
