@@ -53,7 +53,7 @@ function TriviaQuestion(props) {
           <h3 className="question__title"> Question {props.index}</h3>
           <QuestionLevel difficulty={props.difficulty}/>
         </div>
-        <p  className="question__text">{props.question}</p>
+        <p  className="question__text">{props.question? decode(props.question): ""}</p>
         {props.itens?.map((item,index) =>{
           return <QuestionItem key={index} selectItem={selectItem} item={decode(item)} />
         })}

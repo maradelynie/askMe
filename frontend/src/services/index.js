@@ -12,15 +12,12 @@ const apiDataBase = axios.create({
 });
 
 export async function getCategory()  {
-    
     const response = await apiTrivia.get("api_category.php");
-
     return response.data.trivia_categories
 }
 
 export async function getQuestion(categoryId, difficulty)  {
   const response = await apiTrivia.get(`api.php?amount=1&category=${categoryId}&difficulty=${difficulty}&encode=base64&token=${localStorage.getItem('token')}`);
-  console.log(response.data)
   return response.data.results[0]
 } 
 
@@ -35,7 +32,6 @@ export async function getAllTests()  {
 } 
 export async function sendAnswerData(categoryId, data)  {
   const response = await apiDataBase.put(categoryId, data);
-  console.log(response.data)
   return response.data
 } 
 export async function postStartTrivia(data)  {
