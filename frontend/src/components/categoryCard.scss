@@ -1,0 +1,21 @@
+
+@import "../global.scss";
+
+
+
+
+
+
+.category__card{
+    @extend .card;
+    @extend .clicable;
+
+    height: 7em;
+    display: flex;
+    align-items: flex-end;
+}
+.category__card--complete{
+    @extend .category__card;
+    opacity: .3;
+}
+

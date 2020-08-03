@@ -3,6 +3,7 @@ import CategoryCard from '../../components/categoryCard';
 import {useHistory} from 'react-router-dom'
 import {getCategory,getAllTests,validateToken} from '../../services'
 import {useDispatch} from "react-redux";
+import "./style.scss";
 
 import {setCategoryId,setCategoryName} from "../../actions";
 

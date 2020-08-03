@@ -2,6 +2,8 @@ import React from 'react';
 import { faStar } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
+import  "./questionLevel.scss";
+
 
 function QuestionLevel(props) {
   const renderStars = () =>{

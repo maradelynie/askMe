@@ -1,0 +1,18 @@
+
+@import "../global.scss";
+
+
+
+
+.question__item{
+    @extend .card;
+    @extend .clicable;
+    box-sizing: content-box;
+    margin: 1em 0;
+}
+.question__item--selected{
+    @extend .question__item;
+    border: 3px solid $principal-highlight-color;
+}
+
+

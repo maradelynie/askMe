@@ -1,0 +1,19 @@
+
+@import "../global.scss";
+
+
+
+
+
+
+
+
+.header__container{
+    background-color: $principal-color;
+    padding: 1em;
+}
+.header__title{
+    font-size: 18px;
+    color: $text-color-light;
+    font-weight: normal;
+}

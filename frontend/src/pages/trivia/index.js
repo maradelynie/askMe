@@ -3,6 +3,8 @@ import { decode } from 'js-base64';
 import {useHistory} from 'react-router-dom';
 import {useSelector} from "react-redux";
 
+import "./style.scss";
+
 import ContentHeader from '../../components/contentHeader';
 import TriviaQuestion from '../../components/triviaQuestion';
 
@@ -37,7 +39,7 @@ export async function updateData (resultsList, data ,categoryId) {
 
   const triviaRecords = [...resultsList, data]
   const newData = await sendAnswerData( id, {questions:triviaRecords})
-  
+  console.log(newData)
   return newData.newData.questions
 }
 export function checkEnd(resultsList,numberOfQuestions) {

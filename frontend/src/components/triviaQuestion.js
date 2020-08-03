@@ -3,6 +3,7 @@ import QuestionLevel from './questionLevel';
 import QuestionItem from './questionItem';
 import DefaultButton from './defaultButton';
 import { decode } from 'js-base64';
+import "./triviaQuestion.scss";
 
 import Notification from './notification';
 

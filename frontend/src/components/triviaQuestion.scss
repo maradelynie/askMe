@@ -1,0 +1,25 @@
+
+@import "../global.scss";
+
+
+
+.question__card{
+    @extend .card;
+    padding: 2em;
+}
+.question__title{
+    font-size: 18px;
+    font-family: 'Avenir', serif;
+    font-weight: 600;
+}
+.question__header{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+
+.question__text{
+    margin: 2em 0 3em;
+}
+

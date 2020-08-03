@@ -2,6 +2,7 @@ import React from 'react';
 import { faCheckCircle, faTimesCircle } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import DefaultButton from './defaultButton';
+import "./notification.scss";
 
 function Notification(props) {
   const card = props.type ? "notification__card--right":"notification__card--wrong";

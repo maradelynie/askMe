@@ -1,6 +1,7 @@
 import React from 'react';
 import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import "./defaultButton.scss";
 
 function DefaultButton(props) {
  

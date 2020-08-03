@@ -1,0 +1,29 @@
+@import "../../global.scss";
+
+
+
+.trivia__title{
+    font-size: 24px;
+}
+.trivia__header{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+}
+.trivia__btnContainer{
+    margin: auto;
+    max-width: 150px;
+}
+
+
+.trivia__container{
+    max-width: 700px;
+    margin: auto;
+}
+
+@media only screen and (max-width: 750px) {
+    .trivia__btnContainer{
+        max-width: unset;
+    }
+}

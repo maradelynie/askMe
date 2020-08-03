@@ -1,5 +1,6 @@
 import React from 'react';
 
+import './questionItem.scss';
 
 function QuestionItem(props) {
   

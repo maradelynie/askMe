@@ -3,6 +3,7 @@ import { faTimes } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {useHistory} from 'react-router-dom'
 
+import "./close.scss";
 
 function Close() {
   const history = useHistory();

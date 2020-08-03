@@ -1,6 +1,7 @@
 import React from 'react';
+import "./monsterDrawing.scss";
 
-function MonterDrawing() {
+function MonsterDrawing() {
  
   return (
     <div className="report__image">
@@ -21,4 +22,4 @@ function MonterDrawing() {
   );
 }
 
-export default MonterDrawing;
+export default MonsterDrawing;

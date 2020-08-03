@@ -1,0 +1,141 @@
+
+@import "../global.scss";
+
+
+
+
+
+
+
+
+.report__image{
+    width: 20%;
+    height: 20%;
+    min-width: 140px;
+    min-height: 140px;
+    position: relative;
+
+}
+
+.imge-body{
+    background-color: #2F2E41;
+    position: absolute;
+    top: 20%;
+    right: 20%;
+    width: 60%;
+    height: 60%;
+    border-radius: 50%;
+}
+.imge-arms{
+    background-color: #2F2E41;
+    position: absolute;
+    transform: rotate(-30deg);
+    top: 45%;
+    right: 5%;
+    width: 90%;
+    height: 15%;
+    border-radius: 50%;
+}
+.imge-leg1{
+    background-color: #2F2E41;
+    position: absolute;
+    top: 70%;
+    right: 33%;
+    width: 10%;
+    height: 20%;
+}
+.imge-leg2{
+    background-color: #2F2E41;
+    position: absolute;
+    top: 70%;
+    right: 53%;
+    width: 10%;
+    height: 20%;
+}
+.imge-feet1{
+    background-color: #2F2E41;
+    position: absolute;
+    top: 85%;
+    right: 25%;
+    width: 18%;
+    height: 8%;
+    border-radius: 50%;
+}
+
+.imge-feet2{
+    background-color: #2F2E41;
+    position: absolute;
+    top: 85%;
+    right: 45%;
+    width: 18%;
+    height: 8%;
+    border-radius: 50%;
+}
+.imge-eye1{
+    background-color: #fff;
+    position: absolute;
+    top: 30%;
+    right: 40%;
+    width: 20%;
+    height: 20%;
+    border-radius: 50%;
+}
+.imge-eye2{
+    background-color: #2F2E41;
+    position: absolute;
+    top: 36%;
+    right: 46%;
+    width: 8%;
+    height: 8%;
+    border-radius: 50%;
+}
+.imge-mouth{
+    background-color: #fff;
+    position: absolute;
+    border-radius: 0% 0% 70% 70%;
+    top: 51%;
+    right: 35%;
+    width: 30%;
+    height: 15%;
+    
+}
+.imge-mouth2{
+    
+    background-color: #2F2E41;
+    position: absolute;
+    top: 42%;
+    right: 35%;
+    width: 30%;
+    height: 17%;
+}
+.imge-mouth3{
+    background-color: #fff;
+
+    position: absolute;
+    border-radius: 30%;
+    top: 56%;
+    right: 35%;
+    width: 30%;
+    height: 5%;
+}
+
+.imge-hat1{
+    background-color: #4ADAC0;
+    position: absolute;
+    border-radius: 70% 70% 40% 40%;
+    transform: rotate(-30deg);
+    top: 15%;
+    right: 55%;
+    width: 30%;
+    height: 20%;
+}
+.imge-shadow{
+    background-color: #000000;
+    opacity: .3;
+    position: absolute;
+    border-radius: 50%;
+    top: 85%;
+    right: 15%;
+    width: 70%;
+    height: 10%;
+}

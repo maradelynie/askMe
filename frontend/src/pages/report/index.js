@@ -1,10 +1,11 @@
 import React, {useState, useEffect} from 'react';
 import DefaultButton from '../../components/defaultButton';
-import MonterDrawing from '../../components/monterDrawing';
+import MonsterDrawing from '../../components/monsterDrawing';
 import {useHistory} from 'react-router-dom'
 import {getResults} from '../../services';
 
 import {useSelector} from "react-redux";
+import "./style.scss";
 
 function Report() {
   const history = useHistory();
@@ -46,10 +47,9 @@ function Report() {
   
   return (
     <>
-    <main className="Main__container">
       <div  className="report__card">
         <div className="report__header">
-          <MonterDrawing />
+          <MonsterDrawing />
           <div  className="report__headerText"><h2>Congratulations!</h2><span>Your finished your {categoryName} test.</span></div>
         </div>
         <div className="report__performanceCard">
@@ -99,7 +99,6 @@ function Report() {
           <DefaultButton action={() => history.push("/")} text="Back to Home"/>
         </div>
       </div>
-    </main>
     </>
   );
 }

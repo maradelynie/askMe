@@ -1,7 +1,10 @@
 {
-  "theme_color": "#2196f3",
-  "background_color": "#2196f3",
-  "display": "browser",
+  "name": "AskMe",
+  "short_name": "AskMe",
+  "theme_color": "#343c58",
+  "background_color": "#343c58",
+  "display": "standalone",
+  "orientation": "portrait",
   "Scope": "/",
   "start_url": "/",
   "icons": [

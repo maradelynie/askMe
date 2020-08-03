@@ -1,0 +1,19 @@
+
+@import "../global.scss";
+
+
+
+
+.difficulty__container{
+    font-size: 12px;
+    background-color: rgba($principal-color, 0.2);
+    padding: 5px 10px;
+    border-radius: 1em;
+    color: $principal-color;
+    display: flex;
+    align-items: center;
+}
+.icon__difficulty{
+    font-size: .7em;
+}
+

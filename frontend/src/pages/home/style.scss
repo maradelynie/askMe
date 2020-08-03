@@ -1,0 +1,36 @@
+@import "../../global.scss";
+
+
+
+.category__container{
+    padding: 1em 0;
+}
+.category__title{
+    line-height: 2.5em;
+    font-size: 44px;
+}
+.category__grid{
+    display: grid;  
+    // flex-wrap: wrap;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    gap: 1em;
+    align-items: center;
+}
+
+@media only screen and (max-width: 7200px) {
+    .category__grid{
+        grid-template-columns: 1fr 1fr 1fr;
+    }
+    .category__title{
+        padding: 0 20px ;
+        font-size: 36px;
+    }
+}
+@media only screen and (max-width: 550px) {
+    .category__grid{
+        grid-template-columns: 1fr 1fr;
+    }
+    .category__title{
+        font-size: 28px;
+    }
+}

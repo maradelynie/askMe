@@ -1,0 +1,61 @@
+
+@import "../global.scss";
+
+
+
+
+
+
+.notification__card{
+    @extend .card;
+    width: 100%;
+    height: 100%;
+    max-width: 350px;
+    max-height: 250px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    
+}
+.notification__btnContainer{
+    width: 100%;
+    max-width: 150px;
+}
+.icon__notification{
+    font-size: 3.5em;
+    margin: 15px;
+}
+.icon__notification--right{
+    @extend .icon__notification;
+
+    color:#32CB82;
+}
+.notification__card--right{
+    @extend .notification__card;
+    border: 3px solid #32CB82;
+}
+.icon__notification--wrong{
+    @extend .icon__notification;
+
+    color:#FF6660;
+}
+.notification__card--wrong{
+    @extend .notification__card;
+    border: 3px solid #FF6660;
+}
+
+
+
+.notification__container{
+    background-color: rgba($text-color-dark, .5);
+    position: fixed;
+    top:0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 10;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
