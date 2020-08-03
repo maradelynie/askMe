@@ -8,7 +8,9 @@ const recordsRouter = require('./routes/testRoutes');
 dotenv.config();
 
 const app = express();
-app.use(cors());
+app.use(cors({
+  origin: process.env.CONSUMO
+}));
 app.use(express.json());
 app.use("/api/testResults", recordsRouter);
 
